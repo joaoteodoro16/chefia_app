@@ -1,3 +1,4 @@
+import 'package:chefia_app/app/core/ui/styles/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class ChefiaApp extends StatelessWidget {
@@ -7,7 +8,7 @@ class ChefiaApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Chefia',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
+      theme: AppTheme.theme
       );
   }
 }
