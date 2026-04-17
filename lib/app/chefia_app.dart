@@ -1,3 +1,5 @@
+import 'package:chefia_app/app/core/provider/app_provider.dart';
+import 'package:chefia_app/app/core/routes/app_routes.dart';
 import 'package:chefia_app/app/core/ui/styles/app_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -6,9 +8,12 @@ class ChefiaApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Chefia',
-      theme: AppTheme.theme
-      );
+    return AppProvider(
+      child: MaterialApp(
+        title: 'Chefia',
+        theme: AppTheme.theme,
+        routes: AppRoutes.routes,
+      ),
+    );
   }
 }
