@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
       listener: (context, state) {
         switch (state.status) {
           case SplashStatus.success:
-            Navigator.pushReplacementNamed(context, AppRoutes.companyForm);
+            Navigator.pushReplacementNamed(context, AppRoutes.login);
             break;
           case SplashStatus.failure:
             ScaffoldMessenger.of(context).showSnackBar(

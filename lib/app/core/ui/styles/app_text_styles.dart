@@ -27,7 +27,7 @@ class AppTextStyles {
       TextStyle(fontWeight: FontWeight.w800, fontFamily: font);
 
   TextStyle get textButtonLabel => textBold.copyWith(
-        fontSize: 14,
+        fontSize: 16,
         color: Colors.white,
       );
   TextStyle get textTittle => textExtraBold.copyWith(
