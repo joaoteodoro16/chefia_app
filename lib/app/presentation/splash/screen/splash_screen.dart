@@ -1,3 +1,4 @@
+import 'package:chefia_app/app/core/routes/app_routes.dart';
 import 'package:chefia_app/app/core/ui/styles/app_colors.dart';
 import 'package:chefia_app/app/core/ui/widgets/app_logo.dart';
 import 'package:chefia_app/app/presentation/splash/cubit/splash_cubit.dart';
@@ -28,8 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
       listener: (context, state) {
         switch (state.status) {
           case SplashStatus.success:
-            //Navigator.pushReplacementNamed(context, AppRoutes.home);
-            print('PASSOU DO SPLASH');
+            Navigator.pushReplacementNamed(context, AppRoutes.companyForm);
             break;
           case SplashStatus.failure:
             ScaffoldMessenger.of(context).showSnackBar(
