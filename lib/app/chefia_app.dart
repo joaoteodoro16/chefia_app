@@ -10,6 +10,7 @@ class ChefiaApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppProvider(
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Chefia',
         theme: AppTheme.theme,
         routes: AppRoutes.routes,
