@@ -1,8 +1,10 @@
+import 'package:chefia_app/app/core/ui/base_state/base_state.dart';
 import 'package:chefia_app/app/core/ui/styles/app_colors.dart';
 import 'package:chefia_app/app/core/ui/styles/app_text_styles.dart';
 import 'package:chefia_app/app/core/ui/widgets/app_button.dart';
 import 'package:chefia_app/app/core/ui/widgets/app_logo.dart';
 import 'package:chefia_app/app/core/ui/widgets/app_text_form_field.dart';
+import 'package:chefia_app/app/presentation/auth/cubit/login/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:validatorless/validatorless.dart';
 
@@ -13,7 +15,7 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends BaseState<LoginScreen, LoginCubit> {
   final _emailEC = TextEditingController();
   final _passwordEC = TextEditingController();
   final _formKey = GlobalKey<FormState>();
