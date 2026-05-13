@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "494147719641",
+    "project_id": "chefia-app-36229",
+    "storage_bucket": "chefia-app-36229.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494147719641:android:023dc1d38e15add8ff09c8",
+        "android_client_info": {
+          "package_name": "br.com.joaoteodoro.chefia_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcg7iD-I7dmDa64d94YVVHHn7OMqpqzts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
