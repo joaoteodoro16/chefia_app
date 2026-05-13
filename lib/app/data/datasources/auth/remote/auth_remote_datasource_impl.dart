@@ -20,7 +20,7 @@ class AuthRemoteDatasourceImpl extends AuthRemoteDatasource {
         'User/auth',
         data: loginRequest.toMap(),
       );
-      return UserModel.fromMap(response.data);
+      return UserModel.fromMap(response.data['data']);
     } on DioException catch (e, s) {
       if (e.response?.statusCode == 401) {
         throw UnauthorizedException(

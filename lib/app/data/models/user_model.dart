@@ -1,11 +1,13 @@
 
+import 'dart:convert';
+
 import '../../domain/entities/user/user_role.dart';
 
 class UserModel {
   final String id;
   final String name;
   final String email;
-  final String companyId;
+  final String? companyId;
   final UserRole role;
   final String accessToken;
 
@@ -13,21 +15,12 @@ class UserModel {
     required this.id,
     required this.name,
     required this.email,
-    required this.companyId,
+    this.companyId,
     required this.role,
     required this.accessToken,
   });
 
-  factory UserModel.fromMap(Map<String, dynamic> map) {
-    return UserModel(
-      id: map['id'] as String,
-      name: map['name'] as String,
-      email: map['email'] as String,
-      companyId: map['companyId'] as String,
-      role: UserRole.fromCode(map['role'] as int),
-      accessToken: map['accessToken'] as String,
-    );
-  }
+
 
   Map<String, dynamic> toMap() {
     return {
@@ -39,4 +32,19 @@ class UserModel {
       'accessToken': accessToken,
     };
   }
+
+  factory UserModel.fromMap(Map<String, dynamic> map) {
+    return UserModel(
+      id: map['id'] ?? '',
+      name: map['name'] ?? '',
+      email: map['email'] ?? '',
+      companyId: map['companyId'],
+      role: UserRole.fromCode(map['role']),
+      accessToken: map['accessToken'] ?? '',
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory UserModel.fromJson(String source) => UserModel.fromMap(json.decode(source));
 }
