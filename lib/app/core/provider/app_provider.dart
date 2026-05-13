@@ -1,3 +1,4 @@
+import 'package:chefia_app/app/core/rest_client/app_rest_client.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,7 +9,7 @@ class AppProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [Provider(create: (context) => Object())],
+      providers: [Provider(create: (context) => AppRestClient())],
       child: child,
     );
   }

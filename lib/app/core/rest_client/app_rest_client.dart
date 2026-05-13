@@ -9,7 +9,7 @@ class AppRestClient extends DioForNative {
   AppRestClient()
       : super(
           BaseOptions(
-            baseUrl: 'http://localhost:5000/api',
+            baseUrl: 'http://10.0.2.2:5000/api/',
             connectTimeout: const Duration(seconds: 5),
             receiveTimeout: const Duration(seconds: 60),
           ),

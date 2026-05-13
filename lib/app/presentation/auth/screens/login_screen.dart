@@ -84,10 +84,15 @@ class _LoginScreenState extends BaseState<LoginScreen, LoginCubit> {
                       const SizedBox(height: 5),
                       AppButton(
                         title: 'Entrar',
-                        onPressed: () {
+                        onPressed: () async {
                           final validate =
                               _formKey.currentState?.validate() ?? false;
-                          if (validate) {}
+                          if (validate) {
+                            await controller.login(
+                              email: _emailEC.text,
+                              password: _passwordEC.text,
+                            );
+                          }
                         },
                       ),
                       const SizedBox(height: 15),
