@@ -1,0 +1,55 @@
+{
+  "@@locale": "pt",
+
+
+  "accessMyAccount": "Acessar minha conta",
+  "@accessMyAccount": {
+    "description": "Texto do cabeçalho de acesso à conta"
+  },
+
+  "login": "Entrar",
+  "@login": {
+    "description": "Texto do botão de login"
+  },
+
+  "email": "E-mail",
+  "@email": {
+    "description": "Campo de email"
+  },
+
+  "password": "Senha",
+  "@password": {
+    "description": "Campo de senha"
+  },
+
+  "forgotPassword": "Esqueci minha senha",
+  "@forgotPassword": {
+    "description": "Texto do botão de esqueci minha senha"
+  },
+
+  "createAccount": "Criar minha conta",
+  "@createAccount": {
+    "description": "Texto do botão de criar minha conta"
+  },
+
+  "version": "Versão:",
+  "@version": {
+    "description": "Texto que indica a versão do aplicativo"
+  },
+
+  "invalidCredentials": "E-mail ou senha inválidos",
+  "@invalidCredentials": {
+    "description": "Mensagem de erro ao autenticar"
+  },
+
+  "requiredField": "Campo obrigatório",
+  "@requiredField": {
+    "description": "Mensagem de validação para campos obrigatórios"
+  },
+
+  "invalidEmail": "Email inválido",
+  "@invalidEmail": {
+    "description": "Mensagem de validação para email inválido"
+  }
+
+}

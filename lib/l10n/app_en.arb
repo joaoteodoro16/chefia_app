@@ -1,0 +1,13 @@
+{
+    "@@locale": "en",
+    "accessMyAccount": "Access my account",
+    "login": "Login",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot my password",
+    "invalidCredentials": "Invalid email or password",
+    "createAccount": "Create my account",
+    "version": "Version:",
+    "requiredField": "Required field",
+    "invalidEmail": "Invalid email"
+}
