@@ -1,6 +1,7 @@
 import 'package:chefia_app/app/core/ui/styles/app_colors.dart';
 import 'package:chefia_app/app/core/ui/styles/app_text_styles.dart';
 import 'package:chefia_app/app/features/home/presentation/widgets/comanda_card.dart';
+import 'package:chefia_app/app/features/home/presentation/widgets/home_drawer.dart';
 import 'package:chefia_app/app/features/home/presentation/widgets/kpi_card.dart';
 import 'package:chefia_app/app/features/home/presentation/widgets/mesa_card.dart';
 import 'package:chefia_app/app/features/home/presentation/widgets/status_chip.dart';
@@ -96,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       backgroundColor: const Color(0xFFF5F6FA),
-      drawer: const Drawer(),
+      drawer: const HomeDrawer(),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
