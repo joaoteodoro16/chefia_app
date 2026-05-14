@@ -1,6 +1,7 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:chefia_app/app/core/extensions/localization_extension.dart';
 import 'package:chefia_app/app/core/provider/app_cubit.dart';
+import 'package:chefia_app/app/core/routes/app_routes.dart';
 import 'package:chefia_app/app/core/ui/base_state/base_state.dart';
 import 'package:chefia_app/app/core/ui/styles/app_colors.dart';
 import 'package:chefia_app/app/core/ui/widgets/app_button.dart';
@@ -41,7 +42,11 @@ class _CompanyFormScreenState
       listener: (context, state) {
         if (state.status == CompanyStatus.success) {
           hideLoader();
-          showSuccess('Empresa criada com sucesso!');
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            AppRoutes.home,
+            (_) => false,
+          );
         } else if (state.status == CompanyStatus.error) {
           hideLoader();
           showError(

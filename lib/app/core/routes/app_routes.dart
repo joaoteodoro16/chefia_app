@@ -1,5 +1,6 @@
 import 'package:chefia_app/app/features/auth/providers/login_provider.dart';
 import 'package:chefia_app/app/features/company/providers/company_form_screen_provider.dart';
+import 'package:chefia_app/app/features/home/provider/home_provider.dart';
 import 'package:chefia_app/app/features/splash/presentation/provider/splash_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,7 @@ class AppRoutes {
   static Map<String, WidgetBuilder> get routes => {
     splash: (context) => SplashProvider.providers,
     login: (context) => LoginProvider.providers,
+    home: (context) => HomeProvider.providers,
     companyForm: (context) => CompanyFormScreenProvider.providers,
   };
 }

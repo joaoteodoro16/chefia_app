@@ -56,7 +56,13 @@ class _LoginScreenState extends BaseState<LoginScreen, LoginCubit> {
             }
             if (state.userLogged?.companyId == null) {
               Navigator.pushReplacementNamed(context, AppRoutes.companyForm);
-            } else {}
+            } else {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                AppRoutes.home,
+                (_) => false,
+              );
+            }
             break;
           case LoginStatus.error:
             hideLoader();
