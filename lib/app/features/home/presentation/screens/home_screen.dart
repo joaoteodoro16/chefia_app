@@ -1,5 +1,9 @@
 import 'package:chefia_app/app/core/ui/styles/app_colors.dart';
 import 'package:chefia_app/app/core/ui/styles/app_text_styles.dart';
+import 'package:chefia_app/app/features/home/presentation/widgets/comanda_card.dart';
+import 'package:chefia_app/app/features/home/presentation/widgets/kpi_card.dart';
+import 'package:chefia_app/app/features/home/presentation/widgets/mesa_card.dart';
+import 'package:chefia_app/app/features/home/presentation/widgets/status_chip.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,50 +15,79 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedTab = 0;
+  _StatusFilter _statusFilter = _StatusFilter.todos;
 
-  final List<_MesaMock> _mesas = const [
-    _MesaMock(numero: '01', lugares: 4, ocupacaoAtual: 2, status: _MesaStatus.livre),
-    _MesaMock(numero: '02', lugares: 6, ocupacaoAtual: 6, status: _MesaStatus.ocupada),
-    _MesaMock(numero: '03', lugares: 4, ocupacaoAtual: 3, status: _MesaStatus.ocupada),
-    _MesaMock(numero: '04', lugares: 2, ocupacaoAtual: 0, status: _MesaStatus.reservada),
-    _MesaMock(numero: '05', lugares: 8, ocupacaoAtual: 5, status: _MesaStatus.ocupada),
-    _MesaMock(numero: '06', lugares: 4, ocupacaoAtual: 0, status: _MesaStatus.livre),
+  final List<MesaMock> _mesas = const [
+    MesaMock(numero: '01', lugares: 4, ocupacaoAtual: 2, status: MesaStatus.aberta),
+    MesaMock(numero: '02', lugares: 6, ocupacaoAtual: 6, status: MesaStatus.ocupada),
+    MesaMock(numero: '03', lugares: 4, ocupacaoAtual: 3, status: MesaStatus.ocupada),
+    MesaMock(numero: '04', lugares: 2, ocupacaoAtual: 0, status: MesaStatus.fechada),
+    MesaMock(numero: '05', lugares: 8, ocupacaoAtual: 5, status: MesaStatus.ocupada),
+    MesaMock(numero: '06', lugares: 4, ocupacaoAtual: 0, status: MesaStatus.aberta),
   ];
 
-  final List<_ComandaMock> _comandas = const [
-    _ComandaMock(
+  final List<ComandaMock> _comandas = const [
+    ComandaMock(
       codigo: '#1024',
       cliente: 'Juliana',
       mesa: '02',
       itens: 7,
       valor: 184.30,
-      status: _ComandaStatus.emAndamento,
+      status: ComandaStatus.emAndamento,
     ),
-    _ComandaMock(
+    ComandaMock(
       codigo: '#1025',
       cliente: 'Carlos',
       mesa: '05',
       itens: 12,
       valor: 362.90,
-      status: _ComandaStatus.emAndamento,
+      status: ComandaStatus.emAndamento,
     ),
-    _ComandaMock(
+    ComandaMock(
       codigo: '#1020',
       cliente: 'Balcao',
       mesa: '-',
       itens: 3,
       valor: 59.00,
-      status: _ComandaStatus.prontaParaFechar,
+      status: ComandaStatus.fechada,
     ),
-    _ComandaMock(
+    ComandaMock(
       codigo: '#1019',
       cliente: 'Fernanda',
       mesa: '03',
       itens: 5,
       valor: 121.80,
-      status: _ComandaStatus.pendente,
+      status: ComandaStatus.pendente,
     ),
   ];
+
+  List<MesaMock> get _mesasFiltradas {
+    switch (_statusFilter) {
+      case _StatusFilter.todos:
+        return _mesas;
+      case _StatusFilter.abertos:
+        return _mesas.where((m) => m.status == MesaStatus.aberta).toList();
+      case _StatusFilter.ocupados:
+        return _mesas.where((m) => m.status == MesaStatus.ocupada).toList();
+      case _StatusFilter.fechados:
+        return _mesas.where((m) => m.status == MesaStatus.fechada).toList();
+    }
+  }
+
+  List<ComandaMock> get _comandasFiltradas {
+    switch (_statusFilter) {
+      case _StatusFilter.todos:
+        return _comandas;
+      case _StatusFilter.abertos:
+        return _comandas
+            .where((c) => c.status == ComandaStatus.pendente || c.status == ComandaStatus.emAndamento)
+            .toList();
+      case _StatusFilter.ocupados:
+        return _comandas.where((c) => c.status == ComandaStatus.emAndamento).toList();
+      case _StatusFilter.fechados:
+        return _comandas.where((c) => c.status == ComandaStatus.fechada).toList();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     end: Alignment.bottomRight,
                     colors: [
                       AppColors.primary,
-                      AppColors.primary.withValues(alpha: 0.86),
+                      AppColors.primary.withOpacity(0.86),
                     ],
                   ),
                   borderRadius: const BorderRadius.only(
@@ -96,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               icon: const Icon(Icons.menu_rounded),
                               color: Colors.white,
                               style: IconButton.styleFrom(
-                                backgroundColor: Colors.white.withValues(alpha: 0.14),
+                                backgroundColor: Colors.white.withOpacity(0.14),
                               ),
                             );
                           },
@@ -116,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Text(
                                 'Fluxo do turno em tempo real',
                                 style: text.textRegular.copyWith(
-                                  color: Colors.white.withValues(alpha: 0.8),
+                                  color: Colors.white.withOpacity(0.8),
                                   fontSize: 12,
                                 ),
                               ),
@@ -156,13 +189,46 @@ class _HomeScreenState extends State<HomeScreen> {
                     Row(
                       children: [
                         Expanded(
-                          child: _KpiCard(
+                          child: KpiCard(
                             label: 'Abertas',
-                            value: _selectedTab == 0 ? '4 mesas' : '3 comandas',
+                            value: _selectedTab == 0
+                                ? '${_mesasFiltradas.length} mesas'
+                                : '${_comandasFiltradas.length} comandas',
                             icon: Icons.table_restaurant_rounded,
                           ),
                         ),
                       ],
+                    ),
+                    const SizedBox(height: 12),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          StatusChip(
+                            label: 'Todos',
+                            selected: _statusFilter == _StatusFilter.todos,
+                            onTap: () => setState(() => _statusFilter = _StatusFilter.todos),
+                          ),
+                          const SizedBox(width: 8),
+                          StatusChip(
+                            label: 'Abertos',
+                            selected: _statusFilter == _StatusFilter.abertos,
+                            onTap: () => setState(() => _statusFilter = _StatusFilter.abertos),
+                          ),
+                          const SizedBox(width: 8),
+                          StatusChip(
+                            label: 'Ocupados',
+                            selected: _statusFilter == _StatusFilter.ocupados,
+                            onTap: () => setState(() => _statusFilter = _StatusFilter.ocupados),
+                          ),
+                          const SizedBox(width: 8),
+                          StatusChip(
+                            label: 'Fechados',
+                            selected: _statusFilter == _StatusFilter.fechados,
+                            onTap: () => setState(() => _statusFilter = _StatusFilter.fechados),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -173,8 +239,8 @@ class _HomeScreenState extends State<HomeScreen> {
               sliver: _selectedTab == 0
                   ? SliverGrid(
                       delegate: SliverChildBuilderDelegate(
-                        (context, index) => _MesaCard(mesa: _mesas[index]),
-                        childCount: _mesas.length,
+                        (context, index) => MesaCard(mesa: _mesasFiltradas[index]),
+                        childCount: _mesasFiltradas.length,
                       ),
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
@@ -184,9 +250,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     )
                   : SliverList.separated(
-                      itemBuilder: (context, index) => _ComandaCard(comanda: _comandas[index]),
+                      itemBuilder: (context, index) => ComandaCard(comanda: _comandasFiltradas[index]),
                       separatorBuilder: (_, _) => const SizedBox(height: 10),
-                      itemCount: _comandas.length,
+                      itemCount: _comandasFiltradas.length,
                     ),
             ),
           ],
@@ -221,297 +287,4 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class _KpiCard extends StatelessWidget {
-  final String label;
-  final String value;
-  final IconData icon;
-
-  const _KpiCard({
-    required this.label,
-    required this.value,
-    required this.icon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final text = context.textStyles;
-
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.12),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.24)),
-      ),
-      child: Row(
-        children: [
-          Icon(icon, color: Colors.white),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  label,
-                  style: text.textRegular.copyWith(
-                    color: Colors.white.withValues(alpha: 0.8),
-                    fontSize: 12,
-                  ),
-                ),
-                Text(
-                  value,
-                  style: text.textSemiBold.copyWith(
-                    color: Colors.white,
-                    fontSize: 13,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _MesaCard extends StatelessWidget {
-  final _MesaMock mesa;
-
-  const _MesaCard({required this.mesa});
-
-  @override
-  Widget build(BuildContext context) {
-    final text = context.textStyles;
-    final statusColor = switch (mesa.status) {
-      _MesaStatus.livre => const Color(0xFF1FA55A),
-      _MesaStatus.ocupada => const Color(0xFFDA4B49),
-      _MesaStatus.reservada => const Color(0xFFE6A52D),
-    };
-
-    final statusLabel = switch (mesa.status) {
-      _MesaStatus.livre => 'Livre',
-      _MesaStatus.ocupada => 'Ocupada',
-      _MesaStatus.reservada => 'Reservada',
-    };
-
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(18),
-        boxShadow: const [
-          BoxShadow(
-            blurRadius: 16,
-            offset: Offset(0, 8),
-            color: Color(0x14000000),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: statusColor.withValues(alpha: 0.14),
-                  borderRadius: BorderRadius.circular(999),
-                ),
-                child: Text(
-                  statusLabel,
-                  style: text.textSemiBold.copyWith(
-                    color: statusColor,
-                    fontSize: 11,
-                  ),
-                ),
-              ),
-              const Spacer(),
-              Icon(Icons.more_horiz_rounded, color: Colors.grey.shade400),
-            ],
-          ),
-          const Spacer(),
-          Text(
-            'Mesa ${mesa.numero}',
-            style: text.textBold.copyWith(
-              color: const Color(0xFF1F2533),
-              fontSize: 20,
-            ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            '${mesa.ocupacaoAtual}/${mesa.lugares} lugares',
-            style: text.textRegular.copyWith(
-              color: const Color(0xFF6E7688),
-              fontSize: 13,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ComandaCard extends StatelessWidget {
-  final _ComandaMock comanda;
-
-  const _ComandaCard({required this.comanda});
-
-  @override
-  Widget build(BuildContext context) {
-    final text = context.textStyles;
-
-    final statusColor = switch (comanda.status) {
-      _ComandaStatus.pendente => const Color(0xFFE6A52D),
-      _ComandaStatus.emAndamento => const Color(0xFF0D86FF),
-      _ComandaStatus.prontaParaFechar => const Color(0xFF1FA55A),
-    };
-
-    final statusLabel = switch (comanda.status) {
-      _ComandaStatus.pendente => 'Pendente',
-      _ComandaStatus.emAndamento => 'Em andamento',
-      _ComandaStatus.prontaParaFechar => 'Pronta para fechar',
-    };
-
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: const [
-          BoxShadow(
-            blurRadius: 12,
-            offset: Offset(0, 6),
-            color: Color(0x12000000),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Text(
-                comanda.codigo,
-                style: text.textBold.copyWith(
-                  color: const Color(0xFF1F2533),
-                  fontSize: 18,
-                ),
-              ),
-              const Spacer(),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: statusColor.withValues(alpha: 0.14),
-                  borderRadius: BorderRadius.circular(999),
-                ),
-                child: Text(
-                  statusLabel,
-                  style: text.textSemiBold.copyWith(
-                    color: statusColor,
-                    fontSize: 11,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Wrap(
-            spacing: 12,
-            runSpacing: 6,
-            children: [
-              _MiniInfo(label: 'Cliente', value: comanda.cliente),
-              _MiniInfo(label: 'Mesa', value: comanda.mesa),
-              _MiniInfo(label: 'Itens', value: '${comanda.itens}'),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Row(
-            children: [
-              Text(
-                'Total',
-                style: text.textRegular.copyWith(
-                  color: const Color(0xFF6E7688),
-                ),
-              ),
-              const Spacer(),
-              Text(
-                'R\$ ${comanda.valor.toStringAsFixed(2)}',
-                style: text.textBold.copyWith(
-                  color: AppColors.primary,
-                  fontSize: 18,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _MiniInfo extends StatelessWidget {
-  final String label;
-  final String value;
-
-  const _MiniInfo({required this.label, required this.value});
-
-  @override
-  Widget build(BuildContext context) {
-    final text = context.textStyles;
-    return RichText(
-      text: TextSpan(
-        text: '$label: ',
-        style: text.textRegular.copyWith(
-          color: const Color(0xFF6E7688),
-          fontSize: 13,
-        ),
-        children: [
-          TextSpan(
-            text: value,
-            style: text.textSemiBold.copyWith(
-              color: const Color(0xFF222938),
-              fontSize: 13,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-enum _MesaStatus { livre, ocupada, reservada }
-
-enum _ComandaStatus { pendente, emAndamento, prontaParaFechar }
-
-class _MesaMock {
-  final String numero;
-  final int lugares;
-  final int ocupacaoAtual;
-  final _MesaStatus status;
-
-  const _MesaMock({
-    required this.numero,
-    required this.lugares,
-    required this.ocupacaoAtual,
-    required this.status,
-  });
-}
-
-class _ComandaMock {
-  final String codigo;
-  final String cliente;
-  final String mesa;
-  final int itens;
-  final double valor;
-  final _ComandaStatus status;
-
-  const _ComandaMock({
-    required this.codigo,
-    required this.cliente,
-    required this.mesa,
-    required this.itens,
-    required this.valor,
-    required this.status,
-  });
-}
+enum _StatusFilter { todos, abertos, ocupados, fechados }
