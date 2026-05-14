@@ -58,7 +58,7 @@ class MesaCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: statusColor.withOpacity(0.14),
+                  color: statusColor.withAlpha(36),
                   borderRadius: BorderRadius.circular(999),
                 ),
                 child: Text(

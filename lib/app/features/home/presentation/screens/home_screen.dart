@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     end: Alignment.bottomRight,
                     colors: [
                       AppColors.primary,
-                      AppColors.primary.withOpacity(0.86),
+                      AppColors.primary.withAlpha(220),
                     ],
                   ),
                   borderRadius: const BorderRadius.only(
@@ -129,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               icon: const Icon(Icons.menu_rounded),
                               color: Colors.white,
                               style: IconButton.styleFrom(
-                                backgroundColor: Colors.white.withOpacity(0.14),
+                                backgroundColor: Colors.white.withAlpha(36),
                               ),
                             );
                           },
@@ -149,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Text(
                                 'Fluxo do turno em tempo real',
                                 style: text.textRegular.copyWith(
-                                  color: Colors.white.withOpacity(0.8),
+                                  color: Colors.white.withAlpha(204),
                                   fontSize: 12,
                                 ),
                               ),

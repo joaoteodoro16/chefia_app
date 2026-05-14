@@ -20,9 +20,9 @@ class KpiCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.12),
+        color: Colors.white.withAlpha(31),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.white.withOpacity(0.24)),
+        border: Border.all(color: Colors.white.withAlpha(61)),
       ),
       child: Row(
         children: [
@@ -35,7 +35,7 @@ class KpiCard extends StatelessWidget {
                 Text(
                   label,
                   style: text.textRegular.copyWith(
-                    color: Colors.white.withOpacity(0.8),
+                    color: Colors.white.withAlpha(204),
                     fontSize: 12,
                   ),
                 ),
