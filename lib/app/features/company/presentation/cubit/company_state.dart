@@ -5,6 +5,7 @@ enum CompanyStatus { initial, loading, success, error }
 class CompanyState extends Equatable {
   final CompanyStatus status;
   final String? errorMessage;
+  
 
   const CompanyState({required this.status, this.errorMessage});
 

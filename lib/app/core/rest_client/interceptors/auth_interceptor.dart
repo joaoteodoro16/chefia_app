@@ -1,3 +1,4 @@
+import 'package:chefia_app/app/core/preferences/app_shared_preferences_key.dart';
 import 'package:chefia_app/app/core/rest_client/app_rest_client.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,7 +14,7 @@ class AuthInterceptor extends Interceptor {
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     final sp = await SharedPreferences.getInstance();
-    final accessToken = sp.getString('accessToken');
+    final accessToken = sp.getString(AppSharedPreferencesKey.accesToken);
 
     options.headers['Authorization'] = 'Bearer $accessToken';
 
@@ -33,6 +34,9 @@ class AuthInterceptor extends Interceptor {
       }  catch (e) {
         //GlobalContext.i.loginExpire();
       }
+
+      handler.next(err);
+      return;
     } else {
       handler.next(err);
     }

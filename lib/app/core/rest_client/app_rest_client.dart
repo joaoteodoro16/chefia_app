@@ -12,6 +12,7 @@ class AppRestClient extends DioForNative {
             baseUrl: 'http://10.0.2.2:5000/api/',
             connectTimeout: const Duration(seconds: 5),
             receiveTimeout: const Duration(seconds: 60),
+            validateStatus: (status) => status != null && status >= 200 && status < 400,
           ),
         ) {
     interceptors.add(

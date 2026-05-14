@@ -1,4 +1,5 @@
 import 'package:chefia_app/app/core/extensions/localization_extension.dart';
+import 'package:chefia_app/app/core/provider/app_cubit.dart';
 import 'package:chefia_app/app/core/routes/app_routes.dart';
 import 'package:chefia_app/app/core/ui/base_state/base_state.dart';
 import 'package:chefia_app/app/core/ui/styles/app_colors.dart';
@@ -50,7 +51,10 @@ class _LoginScreenState extends BaseState<LoginScreen, LoginCubit> {
             break;
           case LoginStatus.success:
             hideLoader();
-            if (state.userLogged?.companyId != null) {
+            if (state.userLogged != null) {
+              context.read<AppCubit>().setUserLogged(state.userLogged);
+            }
+            if (state.userLogged?.companyId == null) {
               Navigator.pushReplacementNamed(context, AppRoutes.companyForm);
             } else {}
             break;
