@@ -29,6 +29,7 @@ dependencies:
   firebase_core: ^4.8.0
   firebase_crashlytics: ^5.2.1
   logger: ^2.7.0
+  brasil_fields: ^1.19.0
 
 dev_dependencies:
   flutter_test:

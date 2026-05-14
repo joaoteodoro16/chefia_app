@@ -1,17 +1,19 @@
 import 'package:chefia_app/app/core/ui/styles/app_colors.dart';
 import 'package:chefia_app/app/core/ui/styles/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AppTextFormField extends StatefulWidget {
   final String? label;
   final bool? obscureText;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
+  final List<TextInputFormatter>? inputFormatters;
   const AppTextFormField({
     super.key,
     this.label,
     this.obscureText = false,
-    this.controller, this.validator,
+    this.controller, this.validator, this.inputFormatters,
   });
 
   @override
@@ -38,6 +40,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
       obscureText: _obscureText,
       controller: widget.controller,
       validator: widget.validator,
+      inputFormatters: widget.inputFormatters,
       decoration: InputDecoration(
         border: defaultBorder,
         focusedBorder: defaultBorder,

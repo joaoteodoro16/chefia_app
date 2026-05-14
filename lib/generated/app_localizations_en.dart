@@ -37,4 +37,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get invalidEmail => 'Invalid email';
+
+  @override
+  String get name => 'Name';
+
+  @override
+  String get nameTooShort => 'Name must be at least 3 characters';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get cnpjRequired => 'CNPJ is required';
+
+  @override
+  String get cnpjInvalid => 'Invalid CNPJ';
+
+  @override
+  String get phone => 'Phone';
+
+  @override
+  String get invalidPhone => 'Invalid phone number';
 }

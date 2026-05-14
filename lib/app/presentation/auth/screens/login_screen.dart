@@ -26,6 +26,13 @@ class _LoginScreenState extends BaseState<LoginScreen, LoginCubit> {
   final _formKey = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    _emailEC.text = "joao@gmail.com";
+    _passwordEC.text = "123123";
+    super.initState();
+  }
+
+  @override
   void dispose() {
     _emailEC.dispose();
     _passwordEC.dispose();

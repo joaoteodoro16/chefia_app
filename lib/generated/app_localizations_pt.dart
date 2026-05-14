@@ -37,4 +37,25 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get invalidEmail => 'Email inválido';
+
+  @override
+  String get name => 'Nome';
+
+  @override
+  String get nameTooShort => 'Nome deve conter pelo menos 3 caracteres';
+
+  @override
+  String get save => 'Salvar';
+
+  @override
+  String get cnpjRequired => 'CNPJ é obrigatório';
+
+  @override
+  String get cnpjInvalid => 'CNPJ inválido';
+
+  @override
+  String get phone => 'Celular';
+
+  @override
+  String get invalidPhone => 'Celular inválido';
 }

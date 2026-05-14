@@ -157,6 +157,48 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Email inválido'**
   String get invalidEmail;
+
+  /// Campo de nome
+  ///
+  /// In pt, this message translates to:
+  /// **'Nome'**
+  String get name;
+
+  /// Mensagem de validação para nome muito curto
+  ///
+  /// In pt, this message translates to:
+  /// **'Nome deve conter pelo menos 3 caracteres'**
+  String get nameTooShort;
+
+  /// Texto do botão de salvar
+  ///
+  /// In pt, this message translates to:
+  /// **'Salvar'**
+  String get save;
+
+  /// Mensagem de validação para CNPJ obrigatório
+  ///
+  /// In pt, this message translates to:
+  /// **'CNPJ é obrigatório'**
+  String get cnpjRequired;
+
+  /// Mensagem de validação para CNPJ inválido
+  ///
+  /// In pt, this message translates to:
+  /// **'CNPJ inválido'**
+  String get cnpjInvalid;
+
+  /// Campo de celular
+  ///
+  /// In pt, this message translates to:
+  /// **'Celular'**
+  String get phone;
+
+  /// Mensagem de validação para celular inválido
+  ///
+  /// In pt, this message translates to:
+  /// **'Celular inválido'**
+  String get invalidPhone;
 }
 
 class _AppLocalizationsDelegate

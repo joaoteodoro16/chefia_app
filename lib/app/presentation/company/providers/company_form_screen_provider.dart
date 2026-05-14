@@ -8,5 +8,5 @@ class CompanyFormScreenProvider {
   static Widget get providers =>
       MultiProvider(providers: [
         Provider(create: (context) => Object(),)
-      ], child: CompanyFormScreen());
+      ], child: CompanyFormScreen(),);
 }

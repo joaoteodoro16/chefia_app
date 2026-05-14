@@ -9,5 +9,12 @@
     "createAccount": "Create my account",
     "version": "Version:",
     "requiredField": "Required field",
-    "invalidEmail": "Invalid email"
+    "invalidEmail": "Invalid email",
+    "name": "Name",
+    "nameTooShort": "Name must be at least 3 characters",
+    "save": "Save",
+    "cnpjRequired": "CNPJ is required",
+    "cnpjInvalid": "Invalid CNPJ",
+    "phone": "Phone",
+    "invalidPhone": "Invalid phone number"
 }
