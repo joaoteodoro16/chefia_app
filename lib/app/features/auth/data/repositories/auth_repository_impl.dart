@@ -1,0 +1,26 @@
+import 'package:chefia_app/app/features/auth/data/datasources/remote/auth_remote_datasource.dart';
+import 'package:chefia_app/app/features/auth/data/models/login_request_model.dart';
+import 'package:chefia_app/app/features/auth/domain/entities/user.dart';
+import 'package:chefia_app/app/features/auth/domain/repositories/auth_repository.dart';
+
+class AuthRepositoryImpl extends AuthRepository {
+  final AuthRemoteDatasource _remoteDatasource;
+
+  AuthRepositoryImpl({required AuthRemoteDatasource remoteDatasource})
+    : _remoteDatasource = remoteDatasource;
+
+  @override
+  Future<User> login({required String email, required String password}) async {
+    final userModel = await _remoteDatasource.login(
+      loginRequest: LoginRequestModel(email: email, password: password),
+    );
+    return User(
+      id: userModel.id,
+      name: userModel.name,
+      email: userModel.email,
+      companyId: userModel.companyId,
+      role: userModel.role,
+      accessToken: userModel.accessToken,
+    );
+  }
+}

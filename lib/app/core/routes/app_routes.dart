@@ -1,6 +1,6 @@
-import 'package:chefia_app/app/presentation/auth/providers/login_provider.dart';
-import 'package:chefia_app/app/presentation/company/providers/company_form_screen_provider.dart';
-import 'package:chefia_app/app/presentation/splash/provider/splash_provider.dart';
+import 'package:chefia_app/app/features/auth/presentation/providers/login_provider.dart';
+import 'package:chefia_app/app/features/company/presentation/providers/company_form_screen_provider.dart';
+import 'package:chefia_app/app/features/splash/presentation/provider/splash_provider.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {
